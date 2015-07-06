@@ -1,0 +1,29 @@
+{
+  "name": "redis-wrapped-mkstemp",
+  "version": "1.0.0",
+  "description": "Use Redis to generate a unique file name (port from rikonor's python redis_wrapped_mkstemp)",
+  "main": "index.js",
+  "dependencies": {
+    "fs": "0.0.2",
+    "node-uuid": "^1.4.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liorpaz/redis-wrapped-mkstemp.git"
+  },
+  "keywords": [
+    "redis",
+    "blob",
+    "file"
+  ],
+  "author": "Lior Paz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liorpaz/redis-wrapped-mkstemp/issues"
+  },
+  "homepage": "https://github.com/liorpaz/redis-wrapped-mkstemp"
+}
