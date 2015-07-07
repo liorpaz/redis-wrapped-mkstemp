@@ -3,6 +3,7 @@ var uuid = require('node-uuid')
 
 //     Param redis:     Redis client
 //     Param namespace: A prefix for the file name
+//     Param createFile: default true, creates an empty file in generated path
 //     Param callback:  Method to be called when file path is creaetd.
 //                      Accepts an error, and the fPath
 //     The purpose of this wrapper is to create a unique blob name in redis
@@ -10,9 +11,12 @@ var uuid = require('node-uuid')
 //     User is responsible for cleaning the filename from Redis
 //     and clean the touched file from the FS
 //
-module.exports.createUniquePath = function(redis, namespace, callback) {
+module.exports.createUniquePath = function(redis, namespace, createFile, callback) {
   if (namespace == undefined) {
     namespace = "tmp";
+  }
+  if (createFile == undefined) {
+    createFile = true;
   }
 
   var touchFile = function(fPath, callback) {
@@ -37,12 +41,17 @@ module.exports.createUniquePath = function(redis, namespace, callback) {
       }
 
       if (result == 1) {
-        touchFile(fPath, function(err) {
-          if (err) {
-            return callback(err);
-          }
+        if (createFile) {
+          touchFile(fPath, function(err) {
+            if (err) {
+              return callback(err);
+            }
+            callback(null, fPath);
+          });
+        } else {
           callback(null, fPath);
-        });
+        }
+
       } else {
         inner();
       }
